@@ -19,6 +19,7 @@ import {
 } from "@/src/auth/auth0Config";
 import { generateRandomHexKey } from "@/src/auth/random";
 import { AUTH_STORAGE_KEYS, deleteAllAuthSecrets, getSecureItem, setSecureItem } from "@/src/auth/secureStorage";
+import { deleteDatabase, isDatabaseOpen, openDatabase } from "@/src/db/database";
 
 export type UserProfile = {
   sub: string;
@@ -68,6 +69,18 @@ export function AuthProvider({ children }: PropsWithChildren) {
   );
 
   const wipeSession = useCallback(async () => {
+    if (!isDatabaseOpen()) {
+      const dbEncryptionKey = await getSecureItem(AUTH_STORAGE_KEYS.dbEncryptionKey);
+      if (dbEncryptionKey) {
+        try {
+          openDatabase(dbEncryptionKey);
+        } catch {
+          // Nothing meaningful left to delete via the DB API if this fails;
+          // the SecureStore wipe below still removes the key either way.
+        }
+      }
+    }
+    deleteDatabase();
     await deleteAllAuthSecrets();
     setUser(null);
     setIsAuthenticated(false);
@@ -81,6 +94,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
 
     const dbEncryptionKey = await generateRandomHexKey(32);
     await setSecureItem(AUTH_STORAGE_KEYS.dbEncryptionKey, dbEncryptionKey);
+    openDatabase(dbEncryptionKey);
 
     const profile = (await AuthSession.fetchUserInfoAsync(
       { accessToken: tokens.accessToken },
@@ -114,13 +128,14 @@ export function AuthProvider({ children }: PropsWithChildren) {
     const activeDiscovery = discovery;
 
     async function checkExistingSession() {
-      const [expiresAtRaw, sessionStartedAtRaw, refreshToken] = await Promise.all([
+      const [expiresAtRaw, sessionStartedAtRaw, refreshToken, dbEncryptionKey] = await Promise.all([
         getSecureItem(AUTH_STORAGE_KEYS.expiresAt),
         getSecureItem(AUTH_STORAGE_KEYS.sessionStartedAt),
         getSecureItem(AUTH_STORAGE_KEYS.refreshToken),
+        getSecureItem(AUTH_STORAGE_KEYS.dbEncryptionKey),
       ]);
 
-      if (!expiresAtRaw || !sessionStartedAtRaw || !refreshToken) {
+      if (!expiresAtRaw || !sessionStartedAtRaw || !refreshToken || !dbEncryptionKey) {
         setIsLoading(false);
         return;
       }
@@ -133,6 +148,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
       }
 
       if (Date.now() < Number(expiresAtRaw)) {
+        openDatabase(dbEncryptionKey);
         const cachedProfile = await getSecureItem(AUTH_STORAGE_KEYS.userProfile);
         setUser(cachedProfile ? (JSON.parse(cachedProfile) as UserProfile) : null);
         setIsAuthenticated(true);
@@ -146,6 +162,7 @@ export function AuthProvider({ children }: PropsWithChildren) {
           activeDiscovery,
         );
         await persistTokens(refreshed);
+        openDatabase(dbEncryptionKey);
         const cachedProfile = await getSecureItem(AUTH_STORAGE_KEYS.userProfile);
         setUser(cachedProfile ? (JSON.parse(cachedProfile) as UserProfile) : null);
         setIsAuthenticated(true);
