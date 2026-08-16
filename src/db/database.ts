@@ -24,6 +24,7 @@ export function openDatabase(encryptionKey: string): DB {
     throw new Error("op-sqlite was not built with SQLCipher support (check the op-sqlite config in package.json).");
   }
   const db = open({ name: DB_NAME, encryptionKey });
+  db.executeSync("PRAGMA foreign_keys = ON;");
   runMigrations(db);
   dbInstance = db;
   return db;
