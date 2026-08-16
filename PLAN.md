@@ -28,6 +28,10 @@
 - Logout URI: 'com.bbl.bookmarks://oauth/callback'
 - Scope: openid profile email offline_access
 - API Audience (available): 'https://bbl-candidate-test-api'
+- use expo secure storage to save access token
+- Decide how long a session lasts, and what "logged in" means after the app has been killed,
+  backgrounded for a week, or run with no connectivity. (optional,open to discuss, but i think 7 day and we force logout if user still offline and completely remove user data like normal flow, for when mobile get stolen, prevent other see user data), and if app killed or reconnect, check access token in expo secure storage first, if not expire, open main page, if expired , use refresh token to redeem new token without need to re-login
+  - Follow the current IETF best practice for OAuth in native apps, should go with
 
 # optional (can do later)
 
