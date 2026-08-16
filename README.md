@@ -32,6 +32,10 @@ In this repo, we only run Expo with a **Development build**, and only on **iOS**
 
 We use **yarn** as the package manager (locked via `packageManager` in `package.json`) — please don't run `npm install`.
 
+## Platform specific
+
+- I know that styling like shadowoffset or shadow style is only work in ios and android use another style like elevation, and also use style of keyboardavoidingview that set differently on ios and android
+
 ## Learn more
 
 To learn more about developing your project with Expo, look at the following resources:
