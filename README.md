@@ -1,4 +1,4 @@
-# Welcome to your Expo app 👋
+# Welcome to BBL bookmark manager Expo app 👋
 
 This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
 
@@ -18,7 +18,7 @@ This is an [Expo](https://expo.dev) project created with [`create-expo-app`](htt
 
 ## Platform support (important)
 
-In this repo, we only run Expo with a **Development build**, and only on **iOS**, via `npx expo run:ios`. Android has not been tested (no time), so treat it as unsupported for now.
+In this repo, we only run Expo with a **Development build**, and only on **iOS**, via `npx expo run:ios`. Android has not been tested (no time), so treat it as unsupported for now. (Target: 'Iphone 17 pro')
 
 We use **yarn** as the package manager (locked via `packageManager` in `package.json`) — please don't run `npm install`.
 
