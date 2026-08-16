@@ -26,9 +26,9 @@ const migrations: Record<number, string[]> = {
 };
 
 export function migrationsToRun(fromVersion: number, toVersion: number): string[] {
-  const statements: string[] = [];
+  const migrationStatements: string[] = [];
   for (let version = fromVersion + 1; version <= toVersion; version += 1) {
-    statements.push(...(migrations[version] ?? []));
+    migrationStatements.push(...(migrations[version] ?? []));
   }
-  return statements;
+  return migrationStatements;
 }

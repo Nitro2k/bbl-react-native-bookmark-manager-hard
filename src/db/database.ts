@@ -1,4 +1,4 @@
-import { open, type DB } from "@op-engineering/op-sqlite";
+import { isSQLCipher, open, type DB } from "@op-engineering/op-sqlite";
 
 import { CURRENT_SCHEMA_VERSION, migrationsToRun } from "@/src/db/schema";
 
@@ -20,6 +20,9 @@ function runMigrations(db: DB): void {
 }
 
 export function openDatabase(encryptionKey: string): DB {
+  if (!isSQLCipher()) {
+    throw new Error("op-sqlite was not built with SQLCipher support (check the op-sqlite config in package.json).");
+  }
   const db = open({ name: DB_NAME, encryptionKey });
   runMigrations(db);
   dbInstance = db;
@@ -37,8 +40,19 @@ export function isDatabaseOpen(): boolean {
   return dbInstance !== null;
 }
 
+/**
+ * Deletes the on-disk database file. Never throws: op-sqlite's `.delete()`
+ * throws if the file is already gone, and callers (the logout wipe) must
+ * proceed to clear SecureStore regardless of whether this succeeds.
+ */
 export function deleteDatabase(): void {
   if (!dbInstance) return;
-  dbInstance.delete();
-  dbInstance = null;
+  try {
+    dbInstance.delete();
+  } catch {
+    // Swallow: the caller (the logout wipe) must proceed to clear
+    // SecureStore regardless of whether the file delete succeeded.
+  } finally {
+    dbInstance = null;
+  }
 }
