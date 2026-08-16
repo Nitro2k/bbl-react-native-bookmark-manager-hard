@@ -10,7 +10,17 @@ This is an [Expo](https://expo.dev) project created with [`create-expo-app`](htt
    yarn install
    ```
 
-2. Run the app (Development build, iOS only)
+2. Generate the native iOS project
+
+   `ios/` is gitignored (generated, not committed), so it won't exist on a fresh clone. Generate it with:
+
+   ```bash
+   npx expo prebuild --clean --platform ios
+   ```
+
+   Re-run this (with `--clean`, so it fully regenerates rather than patching in place) any time `app.json` changes (bundle id, scheme, plugins) or a new native dependency is added — `npx expo run:ios` alone won't pick those up on an already-generated `ios/` folder.
+
+3. Run the app (Development build, iOS only)
 
    ```bash
    npx expo run:ios
