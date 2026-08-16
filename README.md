@@ -25,15 +25,12 @@ In the output, you'll find options to open the app in a
 
 You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
 
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
-```
-
 This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+
+## Why I use Expo instead of React Native CLI?
+
+I chose Expo (framework) over the React Native CLI by my experience preference, based on experience at my previous company where i and my team init our mobile app with a bare RN CLI, project when maintenance became difficult to maintain,In last year i was assigned task to upgrading the Android SDK API level to meet minimum require of Google play store (not sure it's level 33 or 34...) and keeping native modules linked correctly was too hard,build often reach to error and red screen, and migrating to the New Architecture required significant manual native-side work.
+So for this test i pick Expo, I remember that Expo can handles that native module problem, SO i think it good for maintainable
 
 ## Learn more
 
@@ -41,10 +38,3 @@ To learn more about developing your project with Expo, look at the following res
 
 - [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
 - [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
