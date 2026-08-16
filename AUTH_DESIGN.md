@@ -7,4 +7,6 @@
 - IETF Best Practice for OAuth in Native Apps:
   Cited: RFC 8252 - OAuth 2.0 for Native Apps (https://datatracker.ietf.org/doc/html/rfc8252), i see best practice to say that login page should occur on real browser safari on ios, not web-view in app, because when user typing id and password, it likely log in app internal log that risk to be expose or stolen.
 
+- Decide which token your app treats as the credential for remote calls.: "Access Token" as it use to pass as a Bearer token to api.
+
 - (optional) did not do it yet, i am thinking from question (3.3 An under-specified requirement)('People should be able to read their bookmarks on the plane. And they shouldn't stay logged in forever.'). i think we should not logged in forever with offline mode, for example: if my phone get stolen and keep offline, that mean my data will expose!, maybe set expire period like 7 day or a month... just decide, and it will force logout that will completely remove user data (token included) for security purpose. after thinking about this question, i see that one of my expense app has none of this feature, look like always-offline mode is not good for security.
