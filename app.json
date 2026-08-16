@@ -43,7 +43,7 @@
       "expo-secure-store"
     ],
     "experiments": {
-      "reactCompiler": true
+      "reactCompiler": false
     }
   }
 }
