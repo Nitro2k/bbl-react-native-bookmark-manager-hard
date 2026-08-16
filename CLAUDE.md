@@ -2,7 +2,7 @@
 
 - This app is bookmark manager I will name it 'BBL bookmark manager'
 - read each line and i am open the discuss if you disagree
-- we are building app that we are focus on security/privacy first and also offline first app
+- we are building app that we are focus on security/privacy first and also offline first app ('People should be able to read their bookmarks on the plane. And they shouldn't stay logged in forever.')
 
 ## Core stack
 
