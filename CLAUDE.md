@@ -1,9 +1,5 @@
 @AGENTS.md
 
-- This app is bookmark manager I will name it 'BBL bookmark manager'
-- read each line and i am open the discuss if you disagree
-- we are building app that we are focus on security/privacy first and also offline first app ('People should be able to read their bookmarks on the plane. And they shouldn't stay logged in forever.')
-
 ## Core stack
 
 - Reac native with Typescript
@@ -25,8 +21,9 @@
 - Auth provider: Auth0.
 - Flow: Authorization Code flow with PKCE (S256). NO implicit flow.
 - Redirect/Logout URI: `com.bbl.bookmarks://oauth/callback`
-- use `https://dev-yg.us.auth0.com/userinfo` per session like one time to get profile data.
-- should prevent user when logout, user should not go back to logged in route. (should test)
+- use and treat can remote call with its credential `https://dev-yg.us.auth0.com/userinfo` which
+  backs the profile screen. It is rate limited — treat it as a one-shot per session, not something to poll.
+- should prevent user from go back when logout, user should not go back to logged-in route. (should test)
 
 ## Verification & Testing (Eval)
 
