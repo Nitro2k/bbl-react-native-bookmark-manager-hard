@@ -30,6 +30,12 @@ Prerequisites: Node, Yarn, Xcode with an iOS Simulator (this repo is iOS-only �
 
    This builds and boots the app on the simulator, and starts the Metro bundler. On first launch you'll land on the Login screen — log in with one of the [test accounts](#test-accounts) below to see the actual app (bookmarks/collections/profile are only reachable once signed in).
 
+## Screenshots
+
+| Login | Bookmarks | Collections | Profile |
+| --- | --- | --- | --- |
+| ![Login](./screenshots/login-screen.png) | ![Bookmarks](./screenshots/bookmark-screen.png) | ![New collection](./screenshots/collection-screen.png) | ![Profile](./screenshots/profile-screen.png) |
+
 ## Platform support (important)
 
 In this repo, we only run Expo with a **Development build**, and only on **iOS**, via `npx expo run:ios`. Android has not been tested (no time), so treat it as unsupported for now. (Target: 'Iphone 17 pro' ios26.5)
@@ -80,7 +86,7 @@ The plan was a Maestro flow automating the exact cross-user check described abov
 
 **Skipped, deliberately**: update/edit for bookmarks and collections (PLAN.md lists this as required; add + delete only was a scope call, not an oversight — so there's no "view one" detail screen either, since nothing to edit). Android (iOS-only throughout). The Maestro E2E flow (see above — attempted, not finished). Everything PLAN.md itself marks optional: biometric gate, an "everything" screen, full-text search.
 
-An EAS build for iOS is in progress separately (not yet resolved either way).
+**Installable build**: an EAS build for iOS is complete — download `application-a1f720af-28a4-4402-85c9-05283fdf3fd8.tar.gz` from the [v1.0.0 release](https://github.com/Nitro2k/bbl-react-native-bookmark-manager-hard/releases/tag/v1.0.0) (iOS only).
 
 ## Platform specific
 
