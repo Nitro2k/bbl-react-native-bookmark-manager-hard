@@ -33,4 +33,4 @@
 ## Mobile Specifics
 
 - Always use `SafeAreaView`. for ui safety to avoid hardware problem like notch or dynamic island of iphone or status bar
-- Handle offline state gracefully (read-only mode for cached SQLite data).
+- The app is fully local (no backend API — see PLAN.md), so there's no "read-only offline mode": once logged in with a non-expired session, behavior is identical online or offline. A passive online/offline indicator is fine; gating any CRUD behind network state is not.

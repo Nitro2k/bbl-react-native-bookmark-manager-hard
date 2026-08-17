@@ -34,3 +34,4 @@
 - On db with sqlite testing, ai suggest that test case that check sidecar file (suffix with -wal, -shm, -journal) of db should not exist but i think it is waste and no value, i think test case of db should be like when login and add data, db should exist and data be encrypt which is not plain text and when logout, db should does not exist
 - try to test thing that security concern
 - also since we have very few ui and no business logic condition,i decide to skip ui component automate test and do manual test for now
+- decide to not add test e2e like maestro since it keep occur bug like ui is not reflect change when run test, a timing issue T^T
